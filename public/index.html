@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Commerce Admin Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1d2340 0, #020617 45%, #000 100%);
+      color: #e5e7eb;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 230px;
+      background: linear-gradient(180deg, rgba(15,23,42,0.95), rgba(15,23,42,0.7));
+      border-right: 1px solid rgba(148,163,184,0.2);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #a855f7;
+    }
+    .menu-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-top: 10px;
+    }
+    .nav {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .nav-item {
+      padding: 8px 10px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5f5;
+      font-size: 14px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .nav-item span.icon {
+      width: 20px;
+      text-align: center;
+    }
+    .nav-item.active {
+      background: radial-gradient(circle at top left, #4f46e5, #1d1b4b);
+      border-color: rgba(129,140,248,0.7);
+      box-shadow: 0 0 18px rgba(99,102,241,0.6);
+    }
+    .nav-item:hover {
+      background: rgba(30,64,175,0.35);
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .top-title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .top-subtitle {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    /* CARD FORM */
+    .card {
+      background: radial-gradient(circle at top, rgba(30,64,175,0.4), rgba(15,23,42,0.95));
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow:
+        0 0 25px rgba(59,130,246,0.25),
+        0 0 45px rgba(129,140,248,0.15);
+    }
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .card p {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 14px;
+    }
+
+    label {
+      font-size: 12px;
+      color: #cbd5e1;
+      display: block;
+      margin-bottom: 4px;
+    }
+    input, textarea, select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px 11px;
+      border-radius: 10px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
+      color: #e2e8f0;
+      font-size: 13px;
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px rgba(99,102,241,0.6);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 4px;
+      box-shadow: 0 8px 25px rgba(79,70,229,0.7);
+    }
+    .btn:hover {
+      filter: brightness(1.05);
+    }
+
+    /* TABLE CARD */
+    .card-table {
+      background: rgba(15,23,42,0.95);
+      border-radius: 18px;
+      padding: 16px 16px 20px;
+      border: 1px solid rgba(148,163,184,0.35);
+      box-shadow: 0 16px 40px rgba(15,23,42,0.9);
+    }
+    .card-table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #9ca3af;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    thead {
+      background: rgba(15,23,42,0.9);
+    }
+    th, td {
+      padding: 8px 6px;
+      text-align: left;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+    tbody tr:hover {
+      background: rgba(30,64,175,0.22);
+    }
+
+    .product-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+    .cell-name {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+    .cell-price {
+      color: #38bdf8;
+      font-weight: 500;
+    }
+    .cell-category {
+      font-size: 11px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(30,64,175,0.5);
+      color: #bfdbfe;
+      display: inline-block;
+    }
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-sm {
+      font-size: 11px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-edit {
+      background: rgba(56,189,248,0.12);
+      color: #38bdf8;
+      border: 1px solid rgba(56,189,248,0.6);
+    }
+    .btn-delete {
+      background: rgba(248,113,113,0.1);
+      color: #fb7185;
+      border: 1px solid rgba(248,113,113,0.6);
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+    }
+    .modal {
+      width: 360px;
+      background: radial-gradient(circle at top, rgba(79,70,229,0.5), rgba(15,23,42,0.98));
+      border-radius: 18px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(129,140,248,0.7);
+      box-shadow:
+        0 0 30px rgba(99,102,241,0.9),
+        0 0 80px rgba(129,140,248,0.6);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .modal-header h3 {
+      font-size: 16px;
+    }
+    .modal-close {
+      cursor: pointer;
+      font-size: 18px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div>
+      <div class="logo">AI-COMMERCE</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px;">Admin Control Panel</div>
+    </div>
+
+    <div>
+      <div class="menu-title">Main</div>
+      <div class="nav">
+        <div class="nav-item active">
+          <span class="icon">📊</span>
+          <span>Products</span>
+        </div>
+        <div class="nav-item">
+          <span class="icon">👥</span>
+          <span>Users (soon)</span>
+        </div>
+        <div class="nav-item">
+          <span class="icon">⚙️</span>
+          <span>Settings (soon)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="top-bar">
+      <div>
+        <div class="top-title">Product Management</div>
+        <div class="top-subtitle">Manage AI commerce catalog, pricing and categories.</div>
+      </div>
+      <div class="pill">Realtime JSON • Localhost:3000</div>
+    </div>
+
+    <div class="layout">
+      <!-- FORM CARD -->
+      <section class="card">
+        <h3>Add New Product</h3>
+        <p>Upload product data and image to update your AI Commerce app.</p>
+
+        <label for="name">Product Name</label>
+        <input id="name" placeholder="e.g. Wireless Headphone X1" />
+
+        <label for="price">Price (IDR)</label>
+        <input id="price" type="number" placeholder="e.g. 299000" />
+
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="Electronics">Electronics</option>
+          <option value="Gadgets">Gadgets</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Lifestyle">Lifestyle</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="desc">Description</label>
+        <textarea id="desc" placeholder="Short description..."></textarea>
+
+        <label for="image">Product Image</label>
+        <input id="image" type="file" accept="image/*" />
+
+        <button class="btn" onclick="uploadProduct()">Upload Product</button>
+      </section>
+
+      <!-- TABLE CARD -->
+      <section class="card-table">
+        <div class="card-table-header">
+          <div>
+            <div style="font-size:15px;font-weight:600;">Product List</div>
+            <div style="font-size:12px;color:#9ca3af;">Manage, edit and delete products.</div>
+          </div>
+          <span class="badge" id="product-count">0 items</span>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="product-body">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <!-- MODAL EDIT -->
+  <div class="modal-backdrop" id="edit-modal-backdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Product</h3>
+        <span class="modal-close" onclick="closeEditModal()">&times;</span>
+      </div>
+
+      <input type="hidden" id="edit-id" />
+
+      <label for="edit-name">Product Name</label>
+      <input id="edit-name" />
+
+      <label for="edit-price">Price (IDR)</label>
+      <input id="edit-price" type="number" />
+
+      <label for="edit-category">Category</label>
+      <select id="edit-category">
+        <option value="Electronics">Electronics</option>
+        <option value="Gadgets">Gadgets</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Lifestyle">Lifestyle</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="edit-desc">Description</label>
+      <textarea id="edit-desc"></textarea>
+
+      <button class="btn" onclick="saveEdit()">Save Changes</button>
+    </div>
+  </div>
+
+  <script>
+    const API_BASE = "http://localhost:3000";
+
+    async function fetchProducts() {
+      const res = await fetch(API_BASE + "/products");
+      const data = await res.json();
+      renderProducts(data);
+    }
+
+    function renderProducts(products) {
+      const body = document.getElementById("product-body");
+      body.innerHTML = "";
+      document.getElementById("product-count").textContent = products.length + " items";
+
+      products.forEach(p => {
+        const tr = document.createElement("tr");
+
+        const tdProduct = document.createElement("td");
+        const img = document.createElement("img");
+        img.className = "product-image";
+        img.src = p.image ? (API_BASE + p.image) : "https://via.placeholder.com/40x40?text=No+Img";
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "cell-name";
+        nameDiv.textContent = p.name;
+        const wrap = document.createElement("div");
+        wrap.style.display = "flex";
+        wrap.style.alignItems = "center";
+        wrap.style.gap = "8px";
+        wrap.appendChild(img);
+        wrap.appendChild(nameDiv);
+        tdProduct.appendChild(wrap);
+
+        const tdPrice = document.createElement("td");
+        tdPrice.className = "cell-price";
+        tdPrice.textContent = "Rp " + Number(p.price || 0).toLocaleString("id-ID");
+
+        const tdCategory = document.createElement("td");
+        const catSpan = document.createElement("span");
+        catSpan.className = "cell-category";
+        catSpan.textContent = p.category || "Other";
+        tdCategory.appendChild(catSpan);
+
+        const tdDesc = document.createElement("td");
+        tdDesc.style.maxWidth = "220px";
+        tdDesc.style.fontSize = "12px";
+        tdDesc.style.color = "#9ca3af";
+        tdDesc.textContent = p.description || "-";
+
+        const tdActions = document.createElement("td");
+        tdActions.style.textAlign = "right";
+        const actionWrap = document.createElement("div");
+        actionWrap.className = "table-actions";
+
+        const btnEdit = document.createElement("button");
+        btnEdit.className = "btn-sm btn-edit";
+        btnEdit.textContent = "Edit";
+        btnEdit.onclick = () => openEditModal(p);
+
+        const btnDelete = document.createElement("button");
+        btnDelete.className = "btn-sm btn-delete";
+        btnDelete.textContent = "Delete";
+        btnDelete.onclick = () => deleteProduct(p.id);
+
+        actionWrap.appendChild(btnEdit);
+        actionWrap.appendChild(btnDelete);
+        tdActions.appendChild(actionWrap);
+
+        tr.appendChild(tdProduct);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdCategory);
+        tr.appendChild(tdDesc);
+        tr.appendChild(tdActions);
+
+        body.appendChild(tr);
+      });
+    }
+
+    async function uploadProduct() {
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const category = document.getElementById("category").value;
+      const desc = document.getElementById("desc").value;
+      const imageInput = document.getElementById("image");
+
+      if (!name || !price) {
+        alert("Name and price are required.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("description", desc);
+      if (imageInput.files[0]) {
+        formData.append("image", imageInput.files[0]);
+      }
+
+      const res = await fetch(API_BASE + "/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+      console.log(result);
+      alert("Product uploaded!");
+      document.getElementById("name").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("desc").value = "";
+      document.getElementById("image").value = "";
+      fetchProducts();
+    }
+
+    function openEditModal(product) {
+      document.getElementById("edit-id").value = product.id;
+      document.getElementById("edit-name").value = product.name;
+      document.getElementById("edit-price").value = product.price;
+      document.getElementById("edit-category").value = product.category || "Other";
+      document.getElementById("edit-desc").value = product.description || "";
+      document.getElementById("edit-modal-backdrop").style.display = "flex";
+    }
+
+    function closeEditModal() {
+      document.getElementById("edit-modal-backdrop").style.display = "none";
+    }
+
+    async function saveEdit() {
+      const id = document.getElementById("edit-id").value;
+      const name = document.getElementById("edit-name").value;
+      const price = document.getElementById("edit-price").value;
+      const category = document.getElementById("edit-category").value;
+      const description = document.getElementById("edit-desc").value;
+
+      const res = await fetch(API_BASE + "/products/" + id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, price, category, description }),
+      });
+
+      const result = await res.json();
+      console.log(result);
+      closeEditModal();
+      fetchProducts();
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm("Delete this product?")) return;
+
+      const res = await fetch(API_BASE + "/products/" + id, {
+        method: "DELETE",
+      });
+
+      const result = await res.json();
+      console.log(result);
+      fetchProducts();
+    }
+
+    // initial load
+    fetchProducts();
+  </script>
+</body>
+</html>

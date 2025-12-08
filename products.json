@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1764954418739",
+    "name": "Sempak kuda",
+    "price": 99999999999,
+    "description": "Bikin Joni anda lembap dan tahan lama",
+    "category": "Lifestyle",
+    "image": "/uploads/1764954418735-output_1x1 (1).webp",
+    "createdAt": "2025-12-05T17:06:58.739Z"
+  },
+  {
+    "id": "1765185286413",
+    "name": "ADVAN WORKPLUS DARBOTZ RYZEN 7 7735HS 16GB 512GB RADEON 680M 14 FHD W11",
+    "price": 8999000,
+    "description": "PAKET LENGKAP:\r\n\r\nSCREEN PROTECTOR TERMASUK PEMASANGAN\r\n\r\nKEYBOARD PROTECTOR\r\n\r\nMOUSEPAD\r\n\r\nMOUSE\r\n\r\n\r\n\r\nSpesifikasi\r\n\r\nProsesor : AMD Ryzen 7 7735HS Up To 4,5Ghz 8 Core 16 Threads\r\n\r\nGPU : AMD Radeon 680M\r\n\r\nMemory : 16GB LPDDR5\r\n\r\nStorage : 512GB M.2 NVMe PCIe Gen 3×4 (upgradable)\r\n\r\nDisplay : 14” IPS FHD (1920×1200)\r\n\r\nAspect Ratio : 16:10\r\n\r\nColor Gamut : 64% sRGB\r\n\r\nRefresh Rate : 60Hz\r\n\r\nAngle Hinge : 180º\r\n\r\nOperating System : Windows 11 Home Original\r\n\r\nWifi : Wifi 6 802.11b/g/n/ac/ax\r\n\r\nCamera : 720p HD\r\n\r\nBluetooth : YES\r\n\r\nFingerprint : YES\r\n\r\nBacklit Keyboard : YES (White)\r\n\r\nDual-cooling System : YES\r\n\r\nBattery : Li-ion Polymer Battery 58Wh\r\n\r\nPort variants :\r\n\r\n– 2x USB 3.2 Type C Gen 1 (Power Delivery / Display Port / DATA / Charger)\r\n\r\n– 2x USB 3.2 Type A Gen 1\r\n\r\n– 1x HDMI\r\n\r\n– 1x Micro SD Reader\r\n\r\n– 1x Headphone / Microphone Combo Jack (3.5mm)\r\n\r\n– 1x Kesington Lock",
+    "category": "Electronics",
+    "image": "/uploads/1765185286406-id-11134207-8224q-mgiutysrc9vsa4@resize_w900_nl.webp",
+    "createdAt": "2025-12-08T09:14:46.413Z"
+  },
+  {
+    "id": "1765185520704",
+    "name": "Honda Supra X 'Bapak' Dibedah Bukan Kaleng-kaleng dan Lebih Cool",
+    "price": 52000000,
+    "description": "SUpra bapak Spesifikasi 9999cc  PEmakain 1 tahun 200km",
+    "category": "Other",
+    "image": "/uploads/1765185520702-modifikasi-honda-supra-x-6jpg-20220919061203.jpg",
+    "createdAt": "2025-12-08T09:18:40.704Z"
+  },
+  {
+    "id": "1765186544856",
+    "name": "Liquid 'Old' X racun Tikus",
+    "price": 200000,
+    "description": "Dapat Membersihkan TIkus RUmah anda mau pun di kantor DPR",
+    "category": "Other",
+    "image": "/uploads/1765186544835-0a5266a5-414c-41a8-978b-4d920098b794.png",
+    "createdAt": "2025-12-08T09:35:44.856Z"
+  }
+]
