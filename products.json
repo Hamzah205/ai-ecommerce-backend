@@ -34,5 +34,41 @@
     "category": "Other",
     "image": "/uploads/1765186544835-0a5266a5-414c-41a8-978b-4d920098b794.png",
     "createdAt": "2025-12-08T09:35:44.856Z"
+  },
+  {
+    "id": "1765208165019",
+    "name": "Service & Bonkar AC ",
+    "price": 20000,
+    "description": "Dapat Membantu anda Meperbaiki Ac dan merusak Ac tetangga ",
+    "category": "Electronics",
+    "image": "/uploads/1765208165016-WhatsApp Image 2025-12-08 at 17.34.22_74bba068.jpg",
+    "createdAt": "2025-12-08T15:36:05.020Z"
+  },
+  {
+    "id": "1765262338967",
+    "name": "handuk",
+    "price": 90000,
+    "description": "handuk basa",
+    "category": "Other",
+    "image": "/uploads/1765262338963-1000180827-removebg-preview.png",
+    "createdAt": "2025-12-09T06:38:58.967Z"
+  },
+  {
+    "id": "1765348093856",
+    "name": "Bubuk Rambut Botak Edition",
+    "price": 200000,
+    "description": "DI jamin 100% mEracik rambut menjadi hilang",
+    "category": "Lifestyle",
+    "image": "/uploads/1765348093853-WhatsApp Image 2025-12-10 at 14.27.02_841e7e66.jpg",
+    "createdAt": "2025-12-10T06:28:13.856Z"
+  },
+  {
+    "id": "1765348163762",
+    "name": "Tikus Kanotr ",
+    "price": 10,
+    "description": "Tikus Yang sering di kantor",
+    "category": "Fashion",
+    "image": "/uploads/1765348163761-bb5567d9b5965aa2fc15bda001449fe3.jpg",
+    "createdAt": "2025-12-10T06:29:23.762Z"
   }
 ]

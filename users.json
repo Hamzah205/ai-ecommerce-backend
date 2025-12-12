@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "1765203087149",
+    "name": "Ilham Arifin ",
+    "email": "ilhamyt@gmail.com",
+    "password": "Cibacoba",
+    "createdAt": "2025-12-08T14:11:27.149Z"
+  },
+  {
+    "id": "1765348351960",
+    "name": "HAMZAH",
+    "email": "hamzah@gmail.com",
+    "password": "123",
+    "createdAt": "2025-12-10T06:32:31.960Z"
+  }
+]
